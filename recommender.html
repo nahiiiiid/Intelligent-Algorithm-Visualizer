@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Algorithm Recommender</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Algorithm Recommender</h1>
+    <form id="recommendation-form">
+      <label for="problem">Problem Statement:</label><br>
+      <textarea id="problem" name="problem" rows="4" cols="50" required></textarea><br>
+      <label for="time_constraint">Time Constraint:</label><br>
+      <input type="text" id="time_constraint" name="time_constraint" placeholder="e.g., O(n log n)" required><br>
+      <label for="space_constraint">Space Constraint:</label><br>
+      <input type="text" id="space_constraint" name="space_constraint" placeholder="e.g., O(n)" required><br>
+      <button type="submit">Get Recommendations</button>
+    </form>
+    <div id="results"></div>
+  </div>
+
+  <script>
+    document.getElementById('recommendation-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const problem = document.getElementById('problem').value;
+      const time_constraint = document.getElementById('time_constraint').value;
+      const space_constraint = document.getElementById('space_constraint').value;
+      
+      // Send POST request to your Flask API
+      const response = await fetch('/recommend', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ problem, time_constraint, space_constraint })
+      });
+      const recommendations = await response.json();
+      
+      // Display the recommendations
+      let output = '<h2>Recommended Algorithms:</h2>';
+      recommendations.forEach((algo, index) => {
+        output += `<div class="card">
+                     <h3>${index+1}. ${algo.name}</h3>
+                     <p><strong>Time:</strong> ${algo.time_complexity}</p>
+                     <p><strong>Space:</strong> ${algo.space_complexity}</p>
+                     <p><strong>Description:</strong> ${algo.description}</p>
+                   </div>`;
+      });
+      document.getElementById('results').innerHTML = output;
+    });
+  </script>
+</body>
+</html>

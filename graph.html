@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graph Algorithm Visualizer</title>
+    <link rel="stylesheet" href="graph.css">
+
+</head>
+<body>
+    <header>
+        <h1>Graph Algorithm Visualizer</h1>
+    </header>
+    <div class="visualizer-container">
+        <div class="controls">
+            <input type="number" id="num-nodes" placeholder="Number of Nodes" min="1" />
+            <input type="number" id="num-edges" placeholder="Number of Edges" min="1" />
+            <button onclick="generateGraph()">Create Graph</button>
+        </div>
+        <div id="edges-inputs" class="controls"></div>
+        <svg id="graph-container"></svg>
+        <button onclick="startBFS()">Start BFS</button>
+        <button onclick="startDFS()">Start DFS</button>
+    </div>
+    <script>
+        class Graph {
+            constructor() {
+                this.adjList = new Map();
+                this.edges = [];
+            }
+
+            addNode(node) {
+                this.adjList.set(node, []);
+            }
+
+            addEdge(node1, node2) {
+                this.adjList.get(node1).push(node2);
+                this.adjList.get(node2).push(node1);
+                this.edges.push([node1, node2]);
+            }
+
+            getNeighbors(node) {
+                return this.adjList.get(node);
+            }
+        }
+
+        const graph = new Graph();
+
+        function generateGraph() {
+            const numNodes = parseInt(document.getElementById('num-nodes').value);
+            const numEdges = parseInt(document.getElementById('num-edges').value);
+
+            if (isNaN(numNodes) || isNaN(numEdges) || numNodes < 1 || numEdges < 1) {
+                alert("Please enter valid numbers for nodes and edges.");
+                return;
+            }
+
+            clearGraph();
+            for (let i = 1; i <= numNodes; i++) {
+                graph.addNode(i.toString());
+            }
+
+            const edgesInputs = document.getElementById('edges-inputs');
+            edgesInputs.innerHTML = '';
+            for (let i = 0; i < numEdges; i++) {
+                const input = document.createElement('div');
+                input.innerHTML = `
+                    <input type="number" class="edge-node" placeholder="Node 1" min="1" max="${numNodes}" />
+                    <input type="number" class="edge-node" placeholder="Node 2" min="1" max="${numNodes}" />
+                `;
+                edgesInputs.appendChild(input);
+            }
+            const confirmButton = document.createElement('button');
+            confirmButton.innerText = 'Add Edges';
+            confirmButton.onclick = addEdges;
+            edgesInputs.appendChild(confirmButton);
+        }
+
+        function addEdges() {
+            const edgeNodes = document.querySelectorAll('.edge-node');
+            for (let i = 0; i < edgeNodes.length; i += 2) {
+                const node1 = edgeNodes[i].value;
+                const node2 = edgeNodes[i + 1].value;
+                if (node1 && node2 && node1 !== node2) {
+                    graph.addEdge(node1, node2);
+                }
+            }
+            renderGraph();
+            alert('Edges added successfully!');
+        }
+
+        function renderGraph() {
+            const svg = document.getElementById('graph-container');
+            const nodes = Array.from(graph.adjList.keys());
+            const radius = 200;
+            const centerX = 300;
+            const centerY = 300;
+
+            const positions = {};
+
+            nodes.forEach((node, index) => {
+                const angle = (2 * Math.PI * index) / nodes.length;
+                const x = centerX + radius * Math.cos(angle);
+                const y = centerY + radius * Math.sin(angle);
+                positions[node] = { x, y };
+
+                const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                circle.setAttribute("cx", x);
+                circle.setAttribute("cy", y);
+                circle.setAttribute("r", 20);
+                circle.setAttribute("class", "node");
+                circle.setAttribute("id", node);
+                svg.appendChild(circle);
+
+                const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                text.setAttribute("x", x);
+                text.setAttribute("y", y + 5);
+                text.setAttribute("text-anchor", "middle");
+                text.textContent = node;
+                svg.appendChild(text);
+            });
+
+            graph.edges.forEach(([node1, node2]) => {
+                const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                line.setAttribute("x1", positions[node1].x);
+                line.setAttribute("y1", positions[node1].y);
+                line.setAttribute("x2", positions[node2].x);
+                line.setAttribute("y2", positions[node2].y);
+                line.setAttribute("class", "edge");
+                svg.appendChild(line);
+            });
+        }
+
+        async function bfs(startNode) {
+            const visited = new Set();
+            const queue = [startNode];
+
+            while (queue.length > 0) {
+                const currentNode = queue.shift();
+                const nodeElement = document.getElementById(currentNode);
+                nodeElement.classList.add("visited");
+                await new Promise(resolve => setTimeout(resolve, 500));
+
+                const neighbors = graph.getNeighbors(currentNode);
+                for (const neighbor of neighbors) {
+                    if (!visited.has(neighbor)) {
+                        visited.add(neighbor);
+                        queue.push(neighbor);
+                    }
+                }
+            }
+        }
+
+        async function dfs(startNode, visited = new Set()) {
+            const nodeElement = document.getElementById(startNode);
+            nodeElement.classList.add("visited");
+            await new Promise(resolve => setTimeout(resolve, 500));
+
+            visited.add(startNode);
+
+            const neighbors = graph.getNeighbors(startNode);
+            for (const neighbor of neighbors) {
+                if (!visited.has(neighbor)) {
+                    await dfs(neighbor, visited);
+                }
+            }
+        }
+
+        function startBFS() {
+            clearVisited();
+            const startNode = Array.from(graph.adjList.keys())[0];
+            if (startNode) bfs(startNode);
+        }
+
+        function startDFS() {
+            clearVisited();
+            const startNode = Array.from(graph.adjList.keys())[0];
+            if (startNode) dfs(startNode);
+        }
+
+        function clearVisited() {
+            document.querySelectorAll(".node").forEach(node => {
+                node.classList.remove("visited");
+            });
+        }
+
+        function clearGraph() {
+            graph.adjList.clear();
+            graph.edges = [];
+            const svg = document.getElementById("graph-container");
+            svg.innerHTML = '';
+            document.getElementById("edges-inputs").innerHTML = '';
+        }
+    </script>
+</body>
+</html>
