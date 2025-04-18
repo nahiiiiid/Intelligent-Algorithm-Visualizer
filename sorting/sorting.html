@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sorting Algorithm Visualizer</title>
+  <link rel="stylesheet" href="sorting.css">
+</head>
+<body>
+  <header>
+    <h1>Sorting Algorithm Visualizer</h1>
+  </header>
+
+  <!-- Control Bar -->
+  <div class="controls">
+    <select id="array-type">
+      <option value="random">Random</option>
+      <option value="custom">Custom</option>
+    </select>
+    <input type="number" id="custom-size" placeholder="Size" style="display:none; width:4rem;" />
+    <input type="text" id="custom-array-input" placeholder="e.g. 5,3,8,1" style="display:none; width:10rem;" />
+    <select id="order-type">
+      <option value="asc">Ascending</option>
+      <option value="desc">Descending</option>
+    </select>
+    <label for="speed-input">Speed:</label>
+    <input type="range" id="speed-input" min="50" max="1000" step="50" value="300" />
+    <button id="generate-btn">Generate Array</button>
+    <button id="play-btn" disabled>Play</button>
+    <button id="pause-btn" disabled>Pause</button>
+    <button id="back-btn" disabled>&lt; Back</button>
+    <button id="forward-btn" disabled>Forward &gt;</button>
+  </div>
+
+  <!-- Algorithm Selection -->
+  <div class="algorithms">
+    <label><input type="radio" name="algo" value="bubble" checked> Bubble Sort</label>
+    <label><input type="radio" name="algo" value="selection"> Selection Sort</label>
+    <label><input type="radio" name="algo" value="insertion"> Insertion Sort</label>
+    <label><input type="radio" name="algo" value="merge"> Merge Sort</label>
+    <label><input type="radio" name="algo" value="quick"> Quick Sort</label>
+  </div>
+
+  <!-- Visualization -->
+  <div class="bars" id="bars"></div>
+  <div class="steps-log" id="steps-log"></div>
+
+  <script src="sorting.js"></script>
+
+</body>
+</html>

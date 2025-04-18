@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Searching Algorithm Visualizer</title>
+  <link rel="stylesheet" href="searching.css">
+</head>
+<body>
+  <header>
+    <h1>Searching Algorithm Visualizer</h1>
+  </header>
+
+  <!-- Control Bar -->
+  <div class="controls">
+    <select id="array-type">
+      <option value="random">Random</option>
+      <option value="custom">Custom</option>
+    </select>
+    <input type="number" id="custom-size" placeholder="Size" style="display:none; width:4rem;" />
+    <input type="text" id="custom-array-input" placeholder="e.g. 5,3,8,1" style="display:none; width:10rem;" />
+    <label for="speed-input">Speed:</label>
+    <input type="range" id="speed-input" min="50" max="1000" step="50" value="300" />
+    <button id="generate-btn">Generate Array</button>
+    <input type="number" id="target-input" placeholder="Target" />
+    <button id="play-btn" disabled>Play</button>
+    <button id="pause-btn" disabled>Pause</button>
+    <button id="back-btn" disabled>&lt; Back</button>
+    <button id="forward-btn" disabled>Forward &gt;</button>
+  </div>
+
+  <!-- Search Type Selection -->
+  <div class="search-types">
+    <label><input type="radio" name="search-type" value="linear" checked> Linear Search</label>
+    <label><input type="radio" name="search-type" value="binary"> Binary Search</label>
+  </div>
+
+  <!-- Bars Container -->
+  <div class="bars" id="bars"></div>
+
+  <!-- Steps Log -->
+  <div class="steps-log" id="steps-log"></div>
+
+
+  <script src="searching.js"></script>
+</body>
+</html>
