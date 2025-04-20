@@ -1,47 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Searching Algorithm Visualizer</title>
-  <link rel="stylesheet" href="searching.css">
-</head>
-<body>
-  <header>
-    <h1>Searching Algorithm Visualizer</h1>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Searching Algorithm Visualizer</title>
+    <link rel="stylesheet" href="searching.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="logo">Algorithm Visualizer</div>
+      <div class="nav-buttons">
+        <a class="dropbtn" href="searching.html">Searching</a>
+        <a class="dropbtn" href="sorting.html">Sorting</a>
+        <a class="dropbtn" href="graph.html">Graph</a>
+        <a class="dropbtn" href="pathFinding.html">Path Finding</a>
+        <a class="dropbtn" href="backtracking.html">Backtracking</a>
+        <a class="dropbtn" href="miscellaneous.html">Miscellaneous</a>
 
-  <!-- Control Bar -->
-  <div class="controls">
-    <select id="array-type">
-      <option value="random">Random</option>
-      <option value="custom">Custom</option>
-    </select>
-    <input type="number" id="custom-size" placeholder="Size" style="display:none; width:4rem;" />
-    <input type="text" id="custom-array-input" placeholder="e.g. 5,3,8,1" style="display:none; width:10rem;" />
-    <label for="speed-input">Speed:</label>
-    <input type="range" id="speed-input" min="50" max="1000" step="50" value="300" />
-    <button id="generate-btn">Generate Array</button>
-    <input type="number" id="target-input" placeholder="Target" />
-    <button id="play-btn" disabled>Play</button>
-    <button id="pause-btn" disabled>Pause</button>
-    <button id="back-btn" disabled>&lt; Back</button>
-    <button id="forward-btn" disabled>Forward &gt;</button>
-  </div>
+        <button class="signin-btn">Sign In</button>
+      </div>
+    </nav>
 
-  <!-- Search Type Selection -->
-  <div class="search-types">
-    <label><input type="radio" name="search-type" value="linear" checked> Linear Search</label>
-    <label><input type="radio" name="search-type" value="binary"> Binary Search</label>
-  </div>
+    <!-- Top Control Bar -->
+    <div id="app">
+      <div id="visualizer">
+        <div class="controls">
+          <select id="array-type">
+            <option value="random">Random Array</option>
+            <option value="custom">Custom Array</option>
+          </select>
 
-  <!-- Bars Container -->
-  <div class="bars" id="bars"></div>
+          <input
+            type="number"
+            id="custom-size"
+            placeholder="Size"
+            style="display: none"
+          />
+          <input
+            type="text"
+            id="custom-array-input"
+            placeholder="Enter comma-separated numbers"
+            style="display: none"
+          />
 
-  <!-- Steps Log -->
-  <div class="steps-log" id="steps-log"></div>
+          <input type="number" id="target-input" placeholder="Target Element" />
 
+          <label for="algo-select">Algorithm:</label>
+          <select id="algo-select" name="search-type">
+            <option value="linear" selected>Linear Search</option>
+            <option value="binary">Binary Search</option>
+          </select>
+          <!--
+          <label>
+            <input type="radio" name="search-type" value="linear" checked />
+            Linear Search
+          </label>
+          <label>
+            <input type="radio" name="search-type" value="binary" /> Binary
+            Search
+          </label>
+-->
+          <input
+            type="number"
+            id="speed-input"
+            placeholder="Speed (ms)"
+            value="500"
+          />
+          <button id="generate-btn">Generate</button>
+          <button id="play-btn">Play</button>
+          <button id="pause-btn" disabled>Pause</button>
+          <button id="back-btn" disabled>Back</button>
+          <button id="forward-btn" disabled>Forward</button>
+        </div>
 
-  <script src="searching.js"></script>
-</body>
+        <div id="bars"></div>
+      </div>
+
+      <div id="steps-log">
+        <!-- Steps will be appended here -->
+      </div>
+    </div>
+
+    <script src="searching.js"></script>
+  </body>
 </html>

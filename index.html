@@ -1,59 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
-  <link rel="stylesheet" href="index.css">
-</head>
-<body>
-  <!-- Header with sign in/up buttons -->
-  <div class="header">
-      <button onclick="window.location.href='/login'">Sign In</button>
-      <button onclick="window.location.href='/signup'">Sign Up</button>
-  </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Algorithm Visualizer</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="logo">Intelligent Algorithm Visualizer</div>
+      <div class="nav-buttons">
+        <a class="dropbtn" href="searching/searching.html">Searching</a>
+        <a class="dropbtn" href="sorting/sorting.html">Sorting</a>
+        <a class="dropbtn" href="graph/graph.html">Graph</a>
+        <a class="dropbtn" href="pathFinding/pathFinding.html">Path Finding</a>
+        <a class="dropbtn" href="backtracking/backtracking.html"
+          >Backtracking</a
+        >
+        <a class="dropbtn" href="miscellaneous/miscellaneous.html"
+          >Miscellaneous</a
+        >
 
-  <!-- Background Video of Landing Page -->
-  <video class="video-background" autoplay muted loop>
-      <source src="background.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-  </video>
-
-  <!-- Homepage Content -->
-  <div class="container">
-      <h1>Intelligent Algorithms Visualizer & Recommender</h1>
-        <p>Learn, visualize, and get recommendations for popular algorithms!</p>
-      <div class="card-container">
-          <div class="card" onclick="navigate('searching/searching.html')">
-              <h2>Searching Algorithms</h2>
-              <p>Linear Search, Binary Search</p>
-          </div>
-          <div class="card" onclick="navigate('sorting/sorting.html')">
-              <h2>Sorting Algorithms</h2>
-              <p>Bubble Sort, Selection Sort, Merge Sort</p>
-          </div>
-          <div class="card" onclick="navigate('graph/graph.html')">
-              <h2>Graph Algorithms</h2>
-              <p>DFS, BFS, Dijkstra's</p>
-          </div>
-          <div class="card" onclick="navigate('backtracking/backtracking.html')">
-              <h2>Backtracking Algorithms</h2>
-              <p>Maze Solver, N-Queens</p>
-          </div>
-          <div class="card" onclick="navigate('recommender/recommender.html')">
-              <h2>Intelligent Recommender</h2>
-              <p>Get tailored algorithm recommendations!</p>
-          </div>
-        </div>
+        <button class="signin-btn">Sign In</button>
       </div>
-  </div>
+    </nav>
 
-  <script>
-      // Navigate to a different page
-      function navigate(page) {
-          window.location.href = page;
-      }
-  </script>
+    <!-- Main Content -->
+    <section class="main-content">
+      <h1>Visualize Algorithms Like Never Before</h1>
+    </section>
 
-</body>
+    <script src="index.js"></script>
+  </body>
 </html>
