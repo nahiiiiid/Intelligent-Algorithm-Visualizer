@@ -5,28 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Algorithm Visualizer</title>
     <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="navbar.css" />
   </head>
   <body>
-    <!-- Navbar -->
-    <nav class="navbar">
-      <div class="logo">Intelligent Algorithm Visualizer</div>
-      <div class="nav-buttons">
-        <a class="dropbtn" href="searching/searching.html">Searching</a>
-        <a class="dropbtn" href="sorting/sorting.html">Sorting</a>
-        <a class="dropbtn" href="graph/graph.html">Graph</a>
-        <a class="dropbtn" href="pathFinding/pathFinding.html">Path Finding</a>
-        <a class="dropbtn" href="backtracking/backtracking.html"
-          >Backtracking</a
-        >
-        <a class="dropbtn" href="miscellaneous/miscellaneous.html"
-          >Miscellaneous</a
-        >
-
-        <!--<button class="signin-btn">Sign In</button> -->
-        <button class="signin-btn" id="authButton">Sign In</button>
-
-      </div>
-    </nav>
+    <body>
+      <div id="navbar"></div> <!-- Navbar will be injected here -->
+    
+      <!-- Page-specific content below -->
+    </body>
+    
 
     <!-- Main Content -->
     <section class="main-content">
@@ -34,5 +21,13 @@
     </section>
 
     <script src="index.js"></script>
+    <script>
+      fetch("../navbar.html") // Adjust path if needed
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById("navbar").innerHTML = data;
+        });
+    </script>
+    
   </body>
 </html>
