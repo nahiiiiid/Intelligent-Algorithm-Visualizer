@@ -5,8 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BFS & DFS Visualizer</title>
   <link rel="stylesheet" href="graph.css" />
+  <link rel="stylesheet" href="../navbar.css">
 </head>
 <body>
+  <!-- Navbar -->
+  <body>
+    <div id="navbar"></div> <!-- Navbar will be injected here -->
+  
+    <!-- Page-specific content below -->
+  </body>
   <header><h1>Graph Traversal Visualizer</h1></header>
 
   <div class="controls">
@@ -41,6 +48,13 @@
   <div class="steps-log" id="steps-log"></div>
 
   <script src="graph.js"></script>
+  <script>
+    fetch("../navbar.html") // Adjust path if needed
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById("navbar").innerHTML = data;
+      });
+  </script>
 </body>
     
 </html>
