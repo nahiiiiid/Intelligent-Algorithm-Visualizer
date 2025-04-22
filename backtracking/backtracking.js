@@ -14,22 +14,6 @@ function createChessBoard(n) {
     return board;
 }
 
-function createMazeBoard(rows, cols) {
-    const board = document.createElement('div');
-    board.className = 'board';
-    board.style.gridTemplateColumns = `repeat(${cols}, 50px)`;
-
-    for (let i = 0; i < rows; i++) {
-        for (let j = 0; j < cols; j++) {
-            const cell = document.createElement('div');
-            cell.className = `cell ${(i + j) % 2 === 0 ? 'white' : 'black'}`;
-            cell.id = `maze-cell-${i}-${j}`;
-            board.appendChild(cell);
-        }
-    }
-    return board;
-}
-
 async function solveNQueens(board, row, n, steps) {
     if (row === n) return true;
 
@@ -74,62 +58,9 @@ async function startNQueens() {
     document.getElementById('steps-log').textContent = steps.join('\n');
 }
 
-async function solveMaze(maze, x, y, solution, steps) {
-    const rows = maze.length;
-    const cols = maze[0].length;
-
-    if (x === rows - 1 && y === cols - 1) {
-        solution[x][y] = 1;
-        document.getElementById(`maze-cell-${x}-${y}`).textContent = '*';
-        steps.push(`Reached the end (${x}, ${y})`);
-        return true;
-    }
-
-    if (isSafeMaze(maze, x, y)) {
-        solution[x][y] = 1;
-        document.getElementById(`maze-cell-${x}-${y}`).textContent = '*';
-        steps.push(`Moved to (${x}, ${y})`);
-        await delay();
-
-        if (await solveMaze(maze, x + 1, y, solution, steps)) return true;
-        if (await solveMaze(maze, x, y + 1, solution, steps)) return true;
-
-        solution[x][y] = 0;
-        document.getElementById(`maze-cell-${x}-${y}`).textContent = '';
-        steps.push(`Backtracked from (${x}, ${y})`);
-        await delay();
-    }
-    return false;
-}
-
-function isSafeMaze(maze, x, y) {
-    return x >= 0 && y >= 0 && x < maze.length && y < maze[0].length && maze[x][y] === 1;
-}
-
-async function startMazeSolver() {
-    const rows = 5;
-    const cols = 5;
-    const visualizer = document.getElementById('visualizer');
-    visualizer.innerHTML = '';
-    visualizer.appendChild(createMazeBoard(rows, cols));
-
-    const maze = [
-        [1, 0, 0, 0, 0],
-        [1, 1, 0, 1, 0],
-        [0, 1, 0, 1, 0],
-        [0, 1, 1, 1, 0],
-        [0, 0, 0, 1, 1]
-    ];
-
-    const solution = Array.from({ length: rows }, () => Array(cols).fill(0));
-    const steps = [];
-
-    document.getElementById('steps-log').textContent = '';
-    if (!(await solveMaze(maze, 0, 0, solution, steps))) {
-        steps.push('No path found.');
-    }
-    document.getElementById('steps-log').textContent = steps.join('\n');
-}
+document.getElementById("play-btn").addEventListener("click", () => {
+    startNQueens();
+});
 
 function delay() {
     return new Promise(resolve => setTimeout(resolve, 500));

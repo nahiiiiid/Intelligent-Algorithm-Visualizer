@@ -8,17 +8,51 @@
 
 </head>
 <body>
-    <header>
-        <h1>Backtracking Algorithm Visualizer</h1>
-    </header>
-    <div class="visualizer-container">
-        <div class="controls">
-            <button onclick="startNQueens()">Solve N-Queens</button>
-            <button onclick="startMazeSolver()">Solve Maze</button>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">Algorithm Visualizer</div>
+        <div class="nav-buttons">
+          <a class="dropbtn" href="searching.html">Searching</a>
+          <a class="dropbtn" href="sorting.html">Sorting</a>
+          <a class="dropbtn" href="graph.html">Graph</a>
+          <a class="dropbtn" href="pathFinding.html">Path Finding</a>
+          <a class="dropbtn" href="backtracking.html">Backtracking</a>
+          <a class="dropbtn" href="miscellaneous.html">Miscellaneous</a>
+  
+          <button class="signin-btn">Sign In</button>
         </div>
-        <div id="visualizer"></div>
-        <div class="step" id="steps-log"></div>
-    </div>
+      </nav>
+  
+      <!-- Top Control Bar -->
+      <div id="app">
+        <div id="visualizer">
+          <div class="controls">
+
+            <input type="number" id="target-input" placeholder="N" />
+
+
+            <input
+              type="number"
+              id="speed-input"
+              placeholder="Speed (ms)"
+              value="500"
+            />
+            <button id="generate-btn">Generate</button>
+            <button id="play-btn">Play</button>
+            <button id="pause-btn" disabled>Pause</button>
+            <button id="back-btn" disabled>Back</button>
+            <button id="forward-btn" disabled>Forward</button>
+          </div>
+  
+          <div id="bars"></div>
+        </div>
+  
+        <div id="steps-log">
+          <!-- Steps will be appended here -->
+        </div>
+      </div>
+
     <script src="backtracking.js"></script>
 </body>
 </html>
