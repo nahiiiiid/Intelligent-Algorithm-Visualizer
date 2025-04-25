@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BFS & DFS Visualizer</title>
+  <link rel="stylesheet" href="graph.css" />
+  <link rel="stylesheet" href="../navbar.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <body>
+    <div id="navbar"></div> <!-- Navbar will be injected here -->
+  
+    <!-- Page-specific content below -->
+  </body>
+  <header><h1>Graph Traversal Visualizer</h1></header>
+
+  <div class="controls">
+    <select id="graph-type">
+      <option value="random">Random Graph</option>
+      <option value="custom">Custom Graph</option>
+    </select>
+    <button id="generate-btn">Generate Graph</button>
+    <input type="number" id="num-nodes" placeholder="# Nodes" min="1" style="display:none; width:4rem;" />
+    <input type="number" id="num-edges" placeholder="# Edges" min="0" style="display:none; width:4rem;" />
+    <div id="edge-inputs" style="display:none;"></div>
+    <button id="add-edges-btn" disabled style="display:none;">Add Edges</button>
+
+    <label for="algo-select">Algorithm:</label>
+    <select id="algo-select">
+      <option value="bfs">BFS</option>
+      <option value="dfs">DFS</option>
+    </select>
+
+    <input type="number" id="start-node" placeholder="Start Node" min="1" style="width:4rem;" />
+    <label for="speed-range">Speed:</label>
+    <input type="range" id="speed-range" min="50" max="1000" step="50" value="300" />
+    <button id="play-btn" disabled>Play</button>
+    <button id="pause-btn" disabled>Pause</button>
+    <button id="back-btn" disabled>&lt; Back</button>
+    <button id="forward-btn" disabled>Forward &gt;</button>
+  </div>
+
+  <div class="visualizer-container">
+    <svg id="graph-canvas"></svg>
+  </div>
+  <div class="steps-log" id="steps-log"></div>
+
+  <script src="graph.js"></script>
+  <script>
+    fetch("../navbar.html") // Adjust path if needed
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById("navbar").innerHTML = data;
+      });
+  </script>
+</body>
+    
+</html>

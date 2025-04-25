@@ -1,0 +1,87 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f2f5;
+  color: #333;
+}
+header {
+  background-color: #001529;
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
+}
+.controls {
+  background-color: #fff;
+  padding: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.controls select,
+.controls input[type="number"],
+.controls button,
+.controls input[type="range"] {
+  padding: 0.5rem;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+.controls button {
+  background-color: #1890ff;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.controls button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+.controls button:hover:enabled {
+  background-color: #40a9ff;
+}
+.visualizer-container {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+}
+#graph-canvas {
+  width: 80%;
+  height: 500px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  border-radius: 8px;
+}
+.node {
+  fill: #096dd9;
+  stroke: #0050b3;
+  stroke-width: 2px;
+  transition: fill 0.3s;
+}
+.edge {
+  stroke: #999;
+  stroke-width: 2px;
+}
+.enqueue {
+  fill: #fadb14;
+}
+.visit {
+  fill: #52c41a;
+}
+.steps-log {
+  max-width: 80%;
+  margin: 1rem auto;
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-height: 200px;
+  overflow-y: auto;
+}
+.steps-log p {
+  margin: 0.25rem 0;
+  font-size: 0.9rem;
+}
