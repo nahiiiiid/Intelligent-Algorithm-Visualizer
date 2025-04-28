@@ -1,0 +1,83 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  #navbar {
+    width: 100%;
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  #app {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+  }
+  
+  #controls {
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+  }
+  
+  #controls button, #controls label, #controls input {
+    margin-bottom: 10px;
+  }
+  
+  #grid {
+    display: grid;
+    grid-template-columns: repeat(20, 30px);
+    grid-template-rows: repeat(20, 30px);
+    gap: 1px;
+  }
+  
+  .cell {
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    border: 1px solid #ccc;
+  }
+  
+  .cell.start {
+    background-color: green;
+  }
+  
+  .cell.end {
+    background-color: red;
+  }
+  
+  .cell.wall {
+    background-color: black;
+  }
+  
+  .cell.visited {
+    background-color: lightblue;
+  }
+  
+  .cell.path {
+    background-color: yellow;
+  }
+  
+  #log {
+    margin-left: 20px;
+    width: 200px;
+    max-height: 600px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+  
+  #log h2 {
+    margin-top: 0;
+  }
+  
+  #logContent p {
+    margin: 5px 0;
+  }
+  

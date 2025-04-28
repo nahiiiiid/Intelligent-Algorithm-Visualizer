@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>A* Algorithm Visualizer</title>
+  <link rel="stylesheet" href="a-star.css" />
+  <link rel="stylesheet" href="../navbar.css">
+</head>
+<body>
+  <div id="navbar">
+    <!-- Navbar content can be added here -->
+    <h1>A* Algorithm Visualizer</h1>
+  </div>
+
+  <div id="app">
+    <div id="controls">
+      <button id="startBtn">Start</button>
+      <button id="clearBtn">Clear</button>
+      <label for="speedRange">Speed:</label>
+      <input type="range" id="speedRange" min="10" max="1000" value="100" />
+    </div>
+
+    <div id="grid"></div>
+
+    <div id="log">
+      <h2>Steps Log</h2>
+      <div id="logContent"></div>
+    </div>
+  </div>
+
+  <script src="a-star.js"></script>
+  <script>
+    fetch("../navbar.html") // Adjust path if needed
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById("navbar").innerHTML = data;
+      });
+  </script>
+</body>
+</html>
