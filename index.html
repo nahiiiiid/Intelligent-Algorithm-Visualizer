@@ -8,13 +8,8 @@
     <link rel="stylesheet" href="navbar.css" />
   </head>
   <body>
-    <body>
-      <div id="navbar"></div> <!-- Navbar will be injected here -->
+    <div id="navbar"></div> <!-- Navbar will be injected here -->
     
-      <!-- Page-specific content below -->
-    </body>
-    
-
     <!-- Main Content -->
     <section class="main-content">
       <h1>Visualize Algorithms Like Never Before</h1>
@@ -22,12 +17,28 @@
 
     <script src="index.js"></script>
     <script>
+      // Pass session variable from Flask to JavaScript using a data attribute or inline script
+      const isLoggedIn = "{{ 'true' if session.get('user_id') else 'false' }}";
+      
       fetch("../navbar.html") // Adjust path if needed
         .then(response => response.text())
         .then(data => {
           document.getElementById("navbar").innerHTML = data;
+
+          // Change "Sign In" to "Sign Out" based on login status
+          const authButton = document.getElementById('authButton');
+          
+          if (isLoggedIn === 'true') {
+            authButton.innerText = 'Sign Out';
+            authButton.addEventListener('click', function() {
+                window.location.href = '/logout';
+            });
+          } else {
+            authButton.addEventListener('click', function() {
+                window.location.href = '/login';
+            });
+          }
         });
     </script>
-    
   </body>
 </html>
