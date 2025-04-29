@@ -3,6 +3,7 @@ const startBtn = document.getElementById('startBtn');
 const clearBtn = document.getElementById('clearBtn');
 const speedRange = document.getElementById('speedRange');
 const logContent = document.getElementById('logContent');
+const algorithmSelect = document.getElementById('algorithmSelect');
 
 const rows = 20;
 const cols = 20;
@@ -82,12 +83,10 @@ async function aStar() {
   openSet.push(startNode);
 
   while (openSet.length > 0) {
-    // Sort openSet by f value
     openSet.sort((a, b) => a.f - b.f);
     const current = openSet.shift();
 
     if (current === endNode) {
-      // Reconstruct path
       let temp = current;
       while (temp.previous) {
         temp = temp.previous;
@@ -116,7 +115,52 @@ async function aStar() {
       }
     }
 
-    // Log step
+    logContent.innerHTML += `<p>Visited node (${current.row}, ${current.col})</p>`;
+    await new Promise(resolve => setTimeout(resolve, speedRange.value));
+  }
+
+  logContent.innerHTML += `<p>No path found.</p>`;
+  isRunning = false;
+}
+
+// Dijkstra's Algorithm
+async function dijkstra() {
+  isRunning = true;
+  const openSet = [];
+  startNode.g = 0;
+  openSet.push(startNode);
+
+  while (openSet.length > 0) {
+    openSet.sort((a, b) => a.g - b.g);
+    const current = openSet.shift();
+
+    if (current === endNode) {
+      let temp = current;
+      while (temp.previous) {
+        temp = temp.previous;
+        if (!temp.isStart) {
+          temp.element.classList.add('path');
+        }
+      }
+      logContent.innerHTML += `<p>Path found!</p>`;
+      isRunning = false;
+      return;
+    }
+
+    current.element.classList.add('visited');
+    const neighbors = getNeighbors(current);
+    for (const neighbor of neighbors) {
+      if (neighbor.isWall) continue;
+      const tentativeG = current.g + 1;
+      if (tentativeG < neighbor.g) {
+        neighbor.previous = current;
+        neighbor.g = tentativeG;
+        if (!openSet.includes(neighbor)) {
+          openSet.push(neighbor);
+        }
+      }
+    }
+
     logContent.innerHTML += `<p>Visited node (${current.row}, ${current.col})</p>`;
     await new Promise(resolve => setTimeout(resolve, speedRange.value));
   }
@@ -129,7 +173,12 @@ async function aStar() {
 startBtn.addEventListener('click', () => {
   if (startNode && endNode && !isRunning) {
     logContent.innerHTML = '';
-    aStar();
+    const selectedAlgorithm = algorithmSelect.value;
+    if (selectedAlgorithm === 'a-star') {
+      aStar();
+    } else if (selectedAlgorithm === 'dijkstra') {
+      dijkstra();
+    }
   }
 });
 
