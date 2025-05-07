@@ -7,6 +7,12 @@
     align-items: center;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
+
+.dropbtn i {
+    margin-right: 6px;
+    color: #143764; /* or inherit */
+}
+
                 
 .logo {
     font-size: 24px;

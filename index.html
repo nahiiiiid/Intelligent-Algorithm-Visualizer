@@ -6,26 +6,60 @@
     <title>Algorithm Visualizer</title>
     <link rel="stylesheet" href="index.css" />
     <link rel="stylesheet" href="navbar.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   </head>
   <body>
     <div id="navbar"></div> <!-- Navbar will be injected here -->
+
     
-    <!-- Main Content -->
+    <!-- Main Content 
     <section class="main-content">
       <h1>Visualize Algorithms Like Never Before</h1>
     </section>
+    -->
 
+
+    <!-- Main Content -->
+<section class="main-content">
+  <h1>Visualize Algorithms Like Never Before</h1>
+  <div class="card-grid">
+    <a href="sorting.html" class="card">
+      <img src="assets/a1.png" alt="Sorting Algorithms" />
+      <div class="card-title">Sorting</div>
+    </a>
+    <a href="searching.html" class="card">
+      <img src="assets/a1.png" alt="Searching Algorithms" />
+      <div class="card-title">Searching</div>
+    </a>
+    <a href="graph.html" class="card">
+      <img src="assets/a1.png" alt="Graph Algorithms" />
+      <div class="card-title">Graphs</div>
+    </a>
+    <a href="backtracking.html" class="card">
+      <img src="assets/a1.png" alt="Backtracking" />
+      <div class="card-title">Backtracking</div>
+    </a>
+    <a href="dp.html" class="card">
+      <img src="assets/a1.png" alt="Dynamic Programming" />
+      <div class="card-title">Dynamic Programming</div>
+    </a>
+    <a href="ai.html" class="card">
+      <img src="assets/a1.png" alt="AI Algorithms" />
+      <div class="card-title">AI & ML</div>
+    </a>
+  </div>
+</section>
     <script src="index.js"></script>
     <script>
       // Pass session variable from Flask to JavaScript using a data attribute or inline script
       const isLoggedIn = "{{ 'true' if session.get('user_id') else 'false' }}";
-      
+       
       fetch("../navbar.html") // Adjust path if needed
         .then(response => response.text())
         .then(data => {
           document.getElementById("navbar").innerHTML = data;
 
-          // Change "Sign In" to "Sign Out" based on login status
           const authButton = document.getElementById('authButton');
           
           if (isLoggedIn === 'true') {
@@ -35,7 +69,7 @@
             });
           } else {
             authButton.addEventListener('click', function() {
-                window.location.href = '/login';
+                window.location.href = 'http://127.0.0.1:5000/login';
             });
           }
         });
