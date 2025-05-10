@@ -1,7 +1,7 @@
 const gridElement = document.getElementById('grid');
 const startBtn = document.getElementById('startBtn');
 const clearBtn = document.getElementById('clearBtn');
-const speedRange = document.getElementById('speedRange');
+const speedInput = document.getElementById('speedInput');
 const logContent = document.getElementById('logContent');
 const algorithmSelect = document.getElementById('algorithmSelect');
 
@@ -47,6 +47,10 @@ function Node(row, col) {
 function initGrid() {
   gridElement.innerHTML = '';
   grid = [];
+  startNode = null;
+  endNode = null;
+  isRunning = false;
+
   for (let row = 0; row < rows; row++) {
     const rowArray = [];
     for (let col = 0; col < cols; col++) {
@@ -116,7 +120,7 @@ async function aStar() {
     }
 
     logContent.innerHTML += `<p>Visited node (${current.row}, ${current.col})</p>`;
-    await new Promise(resolve => setTimeout(resolve, speedRange.value));
+    await new Promise(resolve => setTimeout(resolve, speedInput.value));
   }
 
   logContent.innerHTML += `<p>No path found.</p>`;
@@ -162,7 +166,7 @@ async function dijkstra() {
     }
 
     logContent.innerHTML += `<p>Visited node (${current.row}, ${current.col})</p>`;
-    await new Promise(resolve => setTimeout(resolve, speedRange.value));
+    await new Promise(resolve => setTimeout(resolve, speedInput.value));
   }
 
   logContent.innerHTML += `<p>No path found.</p>`;
@@ -173,22 +177,15 @@ async function dijkstra() {
 startBtn.addEventListener('click', () => {
   if (startNode && endNode && !isRunning) {
     logContent.innerHTML = '';
-    const selectedAlgorithm = algorithmSelect.value;
-    if (selectedAlgorithm === 'a-star') {
-      aStar();
-    } else if (selectedAlgorithm === 'dijkstra') {
-      dijkstra();
-    }
+    if (algorithmSelect.value === 'a-star') aStar();
+    else dijkstra();
   }
 });
 
 clearBtn.addEventListener('click', () => {
-  startNode = null;
-  endNode = null;
-  isRunning = false;
   logContent.innerHTML = '';
   initGrid();
 });
 
-// Initialize
+// Initialize on load
 initGrid();

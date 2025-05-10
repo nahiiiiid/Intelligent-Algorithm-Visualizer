@@ -8,31 +8,40 @@
   <link rel="stylesheet" href="../navbar.css">
 </head>
 <body>
-  <div id="navbar">
-    <!-- Navbar content will be injected here -->
-  </div>
+  <!-- Navbar -->
+  <div id="navbar"></div>
 
+  <!-- Main App Container -->
   <div id="app">
-    <div id="controls">
-      <label for="algorithmSelect">Algorithm:</label>
-      <select id="algorithmSelect">
-        <option value="a-star">A*</option>
-        <option value="dijkstra">Dijkstra</option>
-      </select>
-      <button id="startBtn">Start</button>
-      <button id="clearBtn">Clear</button>
-      <label for="speedRange">Speed:</label>
-      <input type="range" id="speedRange" min="10" max="1000" value="100" />
+    <!-- Visualization Area -->
+    <div id="visualizer">
+      <!-- Controls -->
+      <div class="controls">
+        <label for="algorithmSelect">Algorithm:</label>
+        <select id="algorithmSelect">
+          <option value="a-star">A*</option>
+          <option value="dijkstra">Dijkstra</option>
+        </select>
+        <button id="startBtn">Start</button>
+        <button id="clearBtn">Clear</button>
+        <label for="speedInput">Speed (ms):</label>
+        <input type="number" id="speedInput" placeholder="Speed (ms)" value="100" />
+        <h4>[First click to set start cell, second click to set end cell, subsequent clicks to set walls]</h4>
+      </div>
+
+      <!-- Grid Container -->
+      <div id="grid-container">
+        <div id="grid"></div>
+      </div>
     </div>
 
-    <div id="grid"></div>
-
-    <div id="log">
-      <h2>Steps Log</h2>
+    <!-- Steps Log -->
+    <div id="steps-log">
       <div id="logContent"></div>
     </div>
   </div>
 
+  <!-- Scripts -->
   <script src="a-star.js"></script>
   <script>
     fetch("../navbar.html")

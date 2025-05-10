@@ -27,7 +27,7 @@ const edgeInputsDiv = document.getElementById('edge-inputs');
 const addEdgesBtn = document.getElementById('add-edges-btn');
 const algoSelect = document.getElementById('algo-select');
 const startNodeI = document.getElementById('start-node');
-const speedRange = document.getElementById('speed-range');
+const speedInput = document.getElementById('speed-input');
 const playBtn = document.getElementById('play-btn');
 const pauseBtn = document.getElementById('pause-btn');
 const backBtn = document.getElementById('back-btn');
@@ -48,7 +48,11 @@ graphType.addEventListener('change', () => {
 
 // Generate Graph
 generateBtn.addEventListener('click', () => {
-  reset(); graph.clear(); drawClear(); history = [];
+  reset();
+  graph.clear();
+  drawClear();
+  history = [];
+
   if (graphType.value === 'random') {
     const n = Math.floor(Math.random() * 6) + 5;  // 5-10 nodes
     const maxEdges = n * (n - 1) / 2;
@@ -200,7 +204,7 @@ playBtn.addEventListener('click', () => {
       step++;
       renderLogAndGraph();
     }
-  }, parseInt(speedRange.value));
+  }, parseInt(speedInput.value));
 });
 pauseBtn.addEventListener('click', () => {
   clearInterval(intervalId);

@@ -1,82 +1,98 @@
-body {
+* {
   margin: 0;
-  font-family: Arial, sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  padding: 0;
+  box-sizing: border-box;
 }
-
-#navbar {
-  width: 100%;
-  background-color: #333;
-  color: white;
-  padding: 10px;
-  text-align: center;
+html, body {
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #eef1f5;
 }
-
 #app {
   display: flex;
-  flex-direction: row;
-  margin-top: 20px;
+  height: 100vh;
+  width: 100vw;
 }
-
-#controls {
+#visualizer {
+  width: 70%;
   display: flex;
   flex-direction: column;
-  margin-right: 20px;
+  padding: 20px;
 }
-
-#controls button, #controls label, #controls input, #controls select {
-  margin-bottom: 10px;
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+  align-items: center;
 }
+.controls select,
+.controls input,
+.controls button {
+  padding: 6px 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+.controls button {
+  background-color: #2575fc;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+.controls button:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+.controls button:hover:enabled {
+  background-color: #1a5ed9;
+}
+/* Instruction text */
 
+#grid-container {
+  flex-grow: 1;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  padding: 10px;
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 #grid {
   display: grid;
-  grid-template-columns: repeat(20, 30px);
-  grid-template-rows: repeat(20, 30px);
+  grid-template-columns: repeat(20, 1fr);
   gap: 1px;
+  width: 100%;
 }
-
 .cell {
-  width: 30px;
-  height: 30px;
+  aspect-ratio: 1;
   background-color: white;
   border: 1px solid #ccc;
 }
-
-.cell.start {
-  background-color: green;
-}
-
-.cell.end {
-  background-color: red;
-}
-
-.cell.wall {
-  background-color: black;
-}
-
-.cell.visited {
-  background-color: lightblue;
-}
-
-.cell.path {
-  background-color: yellow;
-}
-
-#log {
-  margin-left: 20px;
-  width: 200px;
-  max-height: 600px;
+.cell.start { background-color: green; }
+.cell.end { background-color: red; }
+.cell.wall { background-color: black; }
+.cell.visited { background-color: lightblue; }
+.cell.path { background-color: yellow; }
+#steps-log {
+  width: 30%;
+  height: 100%;
   overflow-y: auto;
-  border: 1px solid #ccc;
-  padding: 10px;
+  padding: 20px;
+  background-color: white;
+  border-left: 1px solid #ddd;
 }
-
-#log h2 {
+#steps-log h2 {
   margin-top: 0;
 }
-
-#logContent p {
-  margin: 5px 0;
+#steps-log p {
+  margin-bottom: 10px;
+  background-color: #f5f5f5;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 14px;
 }

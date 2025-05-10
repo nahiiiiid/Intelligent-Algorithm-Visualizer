@@ -49,6 +49,8 @@
 
 body {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #eef1f5 0%, #dfe7ed 100%);
     background-color: #f3f4f6;
     color: #333;
 }
@@ -75,18 +77,4 @@ body {
     color: #555;
     max-width: 600px;
     margin-bottom: 30px;
-}
-
-.get-started {
-    background-color: #4f46e5;
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    font-size: 16px;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-.get-started:hover {
-    background-color: #4338ca;
 }
