@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <title>Algorithm Recommender</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Intelligent Algorithm Recommender</h1>
+    <div class="fetch-section">
+      <select id="platform">
+        <option value="codeforces">Codeforces</option>
+        <option value="leetcode">LeetCode</option>
+        <option value="hackerrank">HackerRank</option>
+      </select>
+      <input type="text" id="problemId" placeholder="Problem ID / Slug">
+      <button id="fetchBtn">Fetch Problem</button>
+    </div>
+    <div class="recommend-section" style="display:none;">
+      <h2 id="probTitle"></h2>
+      <textarea id="probDesc" readonly></textarea>
+      <button id="recBtn">Recommend Algorithm</button>
+    </div>
+    <div class="result-section" style="display:none;">
+      <h2>Suggested Algorithm: <span id="algo"></span></h2>
+      <p>Time Complexity: <span id="timeC"></span></p>
+      <p>Space Complexity: <span id="spaceC"></span></p>
+      <button id="downloadBtn">Download PDF</button>
+    </div>
+  </div>
+  <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+</body>
+</html>
