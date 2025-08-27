@@ -1,7 +1,0 @@
-flask
-scikit-learn
-nltk
-joblib
-requests
-beautifulsoup4
-reportlab 
